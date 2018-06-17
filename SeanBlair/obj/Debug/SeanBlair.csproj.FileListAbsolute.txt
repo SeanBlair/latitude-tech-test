@@ -1,0 +1,7 @@
+C:\Users\sean\Desktop\job search 2018\Latitude Technologies\Programming assignment\VS Community\SeanBlairHGT\SeanBlair\SeanBlair\bin\Debug\SeanBlair.exe.config
+C:\Users\sean\Desktop\job search 2018\Latitude Technologies\Programming assignment\VS Community\SeanBlairHGT\SeanBlair\SeanBlair\bin\Debug\SeanBlair.exe
+C:\Users\sean\Desktop\job search 2018\Latitude Technologies\Programming assignment\VS Community\SeanBlairHGT\SeanBlair\SeanBlair\bin\Debug\SeanBlair.pdb
+C:\Users\sean\Desktop\job search 2018\Latitude Technologies\Programming assignment\VS Community\SeanBlairHGT\SeanBlair\SeanBlair\obj\Debug\SeanBlair.csprojAssemblyReference.cache
+C:\Users\sean\Desktop\job search 2018\Latitude Technologies\Programming assignment\VS Community\SeanBlairHGT\SeanBlair\SeanBlair\obj\Debug\SeanBlair.csproj.CoreCompileInputs.cache
+C:\Users\sean\Desktop\job search 2018\Latitude Technologies\Programming assignment\VS Community\SeanBlairHGT\SeanBlair\SeanBlair\obj\Debug\SeanBlair.exe
+C:\Users\sean\Desktop\job search 2018\Latitude Technologies\Programming assignment\VS Community\SeanBlairHGT\SeanBlair\SeanBlair\obj\Debug\SeanBlair.pdb
