@@ -22,14 +22,13 @@ namespace SeanBlair
         }
 
 
-        // Returns an array of integers representing the terrain elevation
-        // path in meters that corresponds to the given flightPath LatLon array.
-        // Requires the .hgt tile files of side length 1201 that correspond
-        // to the flight path in the working directory.
-        // Given that the majority of consecutive LatLon readings in a flight
-        // path are in the same .hgt tile file, the algorithm collects all
-        // the consecutive LatLon structs that correspond to the same tile
-        // and then opens that file to find those elevation readings.
+        // Returns an array of integers representing the terrain elevation path in meters that 
+        // corresponds to the given flightPath LatLon array.
+        // Requires the .hgt tile files of side length 1201 that correspond to the flight path 
+        // in the working directory.
+        // Given that the majority of consecutive LatLon readings in a flight path are in the 
+        // same .hgt tile file, the algorithm collects all the consecutive LatLon structs that 
+        // correspond to the same tile and then opens that file to find those elevation readings.
         internal int[] GetElevationPath()
         {
             var elevationPath = new List<int>();
@@ -57,9 +56,8 @@ namespace SeanBlair
             return elevationPath.ToArray();
         }
 
-        // Returns a list of integers that represent terrain elevations in metres 
-        // that correspond to the given list of LatLons, all of which are found
-        // in the same .hgt tile file.
+        // Returns a list of integers that represent terrain elevations in metres that correspond 
+        // to the given list of LatLons, all of which are found in the same .hgt tile file.
         private IEnumerable<int> getElevationsFromTile(List<LatLon> latLonsInSameTile)
         {
             string fileName = getHGTFileNameLength7(latLonsInSameTile[0]);
@@ -102,8 +100,8 @@ namespace SeanBlair
             return elevations;
         }
 
-        // Returns the number of bytes between the beginning of the .hgt file
-        // and the elevation entry that corresponds to latLon.
+        // Returns the number of bytes between the beginning of the .hgt file and the elevation
+        // entry that corresponds to latLon.
         private long getElevationEntryOffset(LatLon latLon)
         {
             double fractionOfDegreeFromBottomLeft = latLon.lat - Math.Floor(latLon.lat);
@@ -118,9 +116,8 @@ namespace SeanBlair
             return offset;
         }
 
-        // Given a LatLon, returns the name of the .hgt tile file where
-        // the corresponding terrain altitude entry is found.
-        // The returned file name contains either N or S, then two digits, 
+        // Given a LatLon, returns the name of the .hgt tile file where the corresponding terrain 
+        // altitude entry is found. The returned file name contains either N or S, then two digits, 
         // then either E or W, then three digits and the extension .HGT
         private string getHGTFileNameLength7(LatLon latLon)
         {
@@ -146,15 +143,14 @@ namespace SeanBlair
             return fileName;
         }
 
-        // Given a .hgt filename with two digits for latitude, returns
-        // a .hgt filename with three digits for latitude.
+        // Given a .hgt filename with two digits for latitude, returns a .hgt filename with 
+        // three digits for latitude.
         private string getHGTFileNameLength8(string hgtFileNameLength7)
         {
             return hgtFileNameLength7.Insert(1, "0");
         }
 
-        // Returns true if LatLon a and LatLon b both share the
-        // same latitude and longitude degrees.
+        // Returns true if LatLon a and LatLon b both share the same latitude and longitude degrees.
         private bool isInSameTile(LatLon a, LatLon b)
         {
             var sameLat = Math.Floor(a.lat) == Math.Floor(b.lat);
