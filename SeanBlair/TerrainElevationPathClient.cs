@@ -1,32 +1,61 @@
 ﻿using System;
+using System.IO;
 
 namespace SeanBlair
 {
     class TerrainElevationPathClient
     {
+        private struct Location
+        {
+            public string Name { get; }
+            public LatLon LatLon { get; }
+            public Location(string name, LatLon latLon)
+            {
+                this.Name = name;
+                this.LatLon = latLon;
+            }
+        }
         static void Main(string[] args)
         {
-            var victoriaHarbour = new LatLon(48.424236, -123.383191);
-            var vicDowntown = new LatLon(48.431202, -123.355085);
-            var mountDoug = new LatLon(48.493261, -123.344507);
-            var elkLake = new LatLon(48.530120, -123.397746);
-            var mountNewton = new LatLon(48.612521, -123.443495);
-            var saanichInlet = new LatLon(48.630709, -123.509374);
-            var ubc = new LatLon(49.263011, -123.248966);
-            var downtownVancouver = new LatLon(49.281924, -123.119978);
-            var simonFraserUni = new LatLon(49.277937, -122.918611);
-            var burrardInlet = new LatLon(49.284007, -122.835490);
-
-            var flightPath = 
-                new LatLon[] { victoriaHarbour, vicDowntown, mountDoug, elkLake, mountNewton,
-                    saanichInlet, ubc, downtownVancouver, simonFraserUni, burrardInlet };
-            var tep = new TerrainElevationPath(flightPath);
-            int[] elevationPath = tep.GetElevationPath();
-            for (var i = 0; i < flightPath.Length; i++)
+            var testLocations = new Location[] {
+                new Location("Victoria Harbour", new LatLon(48.424236, -123.383191)),
+                new Location("Victoria Downtown", new LatLon(48.431202, -123.355085)),
+                new Location("Mount Douglas", new LatLon(48.493261, -123.344507)),
+                new Location("Elk Lake", new LatLon(48.530120, -123.397746)),
+                new Location("Mount Newton", new LatLon(48.612521, -123.443495)),
+                new Location("Saanich Inlet", new LatLon(48.630709, -123.509374)),
+                new Location("UBC Vancouver Campus", new LatLon(49.263011, -123.248966)),
+                new Location("Downtown Vancouver", new LatLon(49.281924, -123.119978)),
+                new Location("Cypress Mountain", new LatLon(49.393771, -123.218798)),
+                new Location("Howe Sound", new LatLon(49.684024, -123.167445)),
+                new Location("Squamish", new LatLon(49.700848, -123.156063))
+            };
+            var flightPath = new LatLon[testLocations.Length];
+            for (var i = 0; i < testLocations.Length; i++)
             {
-                var latLong = flightPath[i];
-                Console.WriteLine($"Elevation at lat-long {latLong.lat}, " +
-                    $"{latLong.lon} is: {elevationPath[i]}");
+                flightPath[i] = testLocations[i].LatLon;
+            }
+
+            var tep = new TerrainElevationPath(flightPath);
+            int[] elevationPath;
+            try
+            {
+                elevationPath = tep.GetElevationPath();
+            }
+            catch (Exception e) when (e is FileNotFoundException || e is ArgumentException)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine();
+                Console.WriteLine(e.StackTrace);
+                return;
+            }
+            
+            for (var i = 0; i < testLocations.Length; i++)
+            {
+                var location = testLocations[i];
+                Console.WriteLine($"Elevation at {location.Name} " +
+                    $"[{location.LatLon.Lat}, {location.LatLon.Lon}] is: " +
+                    $"{elevationPath[i]} meters.");
             }
         }
     }
